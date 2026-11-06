@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tijara POS — billing and stock for Pakistani shops</title>
+    <meta
+      name="description"
+      content="Offline point of sale for supermarts, pharmacies, clothing and general stores in Pakistan. Fast keyboard billing, udhaar khata, stock, reports, Urdu screens and FBR invoices. 14-day free trial."
+    />
+    <meta name="theme-color" content="#0B1A2E" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <meta property="og:title" content="Tijara POS — tez billing, saaf hisaab" />
+    <meta
+      property="og:description"
+      content="Offline point of sale for Pakistani shops. Free 14-day trial for Windows, Mac and Linux."
+    />
+    <meta property="og:image" content="https://tijarapos.github.io/assets/og-image.png" />
+    <meta property="og:url" content="https://tijarapos.github.io/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&family=Noto+Naskh+Arabic:wght@500;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.documentElement.classList.add('js')
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="top">
+      <div class="wrap top-row">
+        <a class="brand" href="#" aria-label="Tijara POS home">
+          <img src="assets/mark-white.svg" alt="" width="30" height="24" />
+          <span>Tijara POS</span>
+        </a>
+        <nav id="nav" aria-label="Sections">
+          <a href="#shops">Shops</a>
+          <a href="#keyboard">Till</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">Questions</a>
+        </nav>
+        <a class="btn btn-small" href="#download">Download</a>
+        <button class="menu" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero: the app on screen, with a receipt that rings itself up. -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="tagline"><span lang="ur" dir="rtl">تیز بلنگ۔ صاف حساب۔</span></p>
+            <h1>Billing, stock and udhaar for your shop</h1>
+            <p class="lede">
+              Tijara POS runs on your shop's own computer and keeps selling when the internet is
+              down. Scan, type the quantity, press Enter. The bill prints, stock updates itself and
+              every rupee is accounted for.
+            </p>
+            <div class="cta">
+              <a class="btn btn-big" id="hero-download" href="#download">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14" /></svg>
+                <span id="hero-download-label">Download free trial</span>
+              </a>
+              <a class="btn btn-ghost btn-big" href="#keyboard">See how it works</a>
+            </div>
+            <ul class="trust">
+              <li>Works offline</li>
+              <li>14-day free trial</li>
+              <li>No monthly fee</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <figure class="window">
+              <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <img
+                src="assets/shots/till.jpg"
+                width="1600"
+                height="961"
+                alt="Tijara POS till with four items on the bill and a total of Rs 6,250"
+              />
+            </figure>
+
+            <div class="keys" aria-hidden="true">
+              <kbd class="key-scan">Scan</kbd><kbd class="key-enter">Enter ⏎</kbd><kbd class="key-pay">F10</kbd>
+            </div>
+            <div class="receipt" aria-label="Example bill: total Rs 6,250 paid in cash">
+              <div class="receipt-head">
+                <b>Al-Madina Super Store</b>
+                <span>Bill TJ-001219 · Cash</span>
+              </div>
+              <ol class="receipt-lines">
+                <li><span>Tapal Danedar 950g</span><span>2 × 1,850</span><b>3,700</b></li>
+                <li><span>Olpers Milk 1L</span><span>3 × 330</span><b>990</b></li>
+                <li><span>Dalda Cooking Oil 1L</span><span>1 × 610</span><b>610</b></li>
+                <li><span>Basmati Rice</span><span>2.5 kg × 380</span><b>950</b></li>
+              </ol>
+              <div class="receipt-total"><span>Total</span><b>Rs <output id="total">6,250</output></b></div>
+              <div class="receipt-paid">Paid · Change Rs 750</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="At a glance">
+        <ul class="wrap stats-row">
+          <li class="reveal"><b>0</b><span>internet needed to sell</span></li>
+          <li class="reveal"><b>2 keys</b><span><kbd>F10</kbd> <kbd>Enter</kbd> to take payment</span></li>
+          <li class="reveal"><b>4</b><span>shop types, set up in minutes</span></li>
+          <li class="reveal"><b lang="ur">اردو</b><span>screens for your cashiers</span></li>
+        </ul>
+      </section>
+
+      <!-- Shop types: switch tabs to see each one's screen. -->
+      <section id="shops" class="section">
+        <div class="wrap">
+          <p class="eyebrow">Made for your counter</p>
+          <h2>Pick your shop. Tijara sets itself up for it.</h2>
+          <div class="switcher reveal">
+            <div class="tabs" role="tablist" aria-label="Shop types">
+              <button role="tab" id="tab-supermart" aria-controls="panel-shop" aria-selected="true" data-shop="supermart">
+                <b>Supermart &amp; grocery</b><span>Fast scanning, weighed items</span>
+              </button>
+              <button role="tab" id="tab-pharmacy" aria-controls="panel-shop" aria-selected="false" tabindex="-1" data-shop="pharmacy">
+                <b>Pharmacy</b><span>Batches, expiry, prescriptions</span>
+              </button>
+              <button role="tab" id="tab-clothing" aria-controls="panel-shop" aria-selected="false" tabindex="-1" data-shop="clothing">
+                <b>Clothing &amp; boutique</b><span>Sizes and colours</span>
+              </button>
+              <button role="tab" id="tab-general" aria-controls="panel-shop" aria-selected="false" tabindex="-1" data-shop="general">
+                <b>General store</b><span>Everything, nothing extra</span>
+              </button>
+            </div>
+            <div class="panel" id="panel-shop" role="tabpanel" aria-labelledby="tab-supermart">
+              <ul class="panel-points" id="shop-points">
+                <li>Quantity first: <kbd>5</kbd><kbd>*</kbd> then scan adds five</li>
+                <li>Rice, sugar and daal from label scales add their own weight</li>
+                <li>Shelf and product labels with barcodes</li>
+              </ul>
+              <figure class="window window-light">
+                <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <img id="shop-shot" src="assets/shots/till.jpg" width="1600" height="961" loading="lazy" alt="The till billing groceries" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The till is driven by the keyboard; each key explains itself. -->
+      <section id="keyboard" class="section section-dark">
+        <div class="wrap">
+          <p class="eyebrow eyebrow-light">Built for speed at the counter</p>
+          <h2>Your hands never leave the keyboard</h2>
+          <p class="section-lede">
+            A barcode scanner types like a keyboard, so a whole bill is scan, Enter, scan, Enter, then
+            <kbd>F10</kbd>. Hover or tab through the keys.
+          </p>
+          <div class="keyboard reveal" role="list">
+            <button class="cap" role="listitem" data-tip="Help: every shortcut on one screen"><b>F1</b><span>Help</span></button>
+            <button class="cap" role="listitem" data-tip="Jump back to the scan box from anywhere"><b>F2</b><span>Scan</span></button>
+            <button class="cap" role="listitem" data-tip="Attach a customer, for udhaar or history"><b>F3</b><span>Customer</span></button>
+            <button class="cap" role="listitem" data-tip="Discount on a line; above your limit asks a manager"><b>F4</b><span>Discount</span></button>
+            <button class="cap" role="listitem" data-tip="Hold this bill and serve the next customer"><b>F5</b><span>Hold</span></button>
+            <button class="cap" role="listitem" data-tip="Bring a held bill back"><b>F6</b><span>Recall</span></button>
+            <button class="cap" role="listitem" data-tip="Return or exchange against a printed bill"><b>F7</b><span>Return</span></button>
+            <button class="cap" role="listitem" data-tip="Change the quantity of the selected line"><b>F8</b><span>Qty</span></button>
+            <button class="cap" role="listitem" data-tip="Change a price, with manager approval"><b>F9</b><span>Price</span></button>
+            <button class="cap cap-pay" role="listitem" data-tip="Take payment: cash, card, JazzCash, Easypaisa, Raast or udhaar"><b>F10</b><span>Pay</span></button>
+            <button class="cap" role="listitem" data-tip="Reprint the last receipt"><b>F12</b><span>Reprint</span></button>
+          </div>
+          <p class="tip" id="tip" aria-live="polite">Take payment: cash, card, JazzCash, Easypaisa, Raast or udhaar</p>
+        </div>
+      </section>
+
+      <!-- Features as a bento: two with real screens, the rest short. -->
+      <section id="features" class="section">
+        <div class="wrap">
+          <p class="eyebrow">From the counter to the back office</p>
+          <h2>Everything a shop runs on</h2>
+          <div class="bento">
+            <article class="card card-wide reveal">
+              <div class="card-copy">
+                <h3>Udhaar khata</h3>
+                <p>Customer credit with limits, payments back into the drawer, and a WhatsApp reminder in one click.</p>
+              </div>
+              <img src="assets/shots/udhaar.jpg" width="1600" height="961" loading="lazy" alt="Customer list with udhaar balances and a payment panel" />
+            </article>
+            <article class="card card-wide reveal">
+              <div class="card-copy">
+                <h3>Reports that answer questions</h3>
+                <p>Sales and profit by day, product, category and cashier. Busy hours, best and slow sellers. Export to Excel.</p>
+              </div>
+              <img src="assets/shots/reports.jpg" width="1600" height="961" loading="lazy" alt="Reports with net sales, profit and a sales-by-day chart" />
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h12" /><circle cx="19" cy="17" r="2" /></svg>
+              <h3>Stock &amp; purchases</h3>
+              <p>Receive from suppliers, track what you owe, count by scanning, see low stock early.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" /><circle cx="12" cy="12" r="2.5" /></svg>
+              <h3>Shifts &amp; cash</h3>
+              <p>Opening cash, cash in and out, and a day-end count that shows any shortage.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.6 2.5 3 5.2" /></svg>
+              <h3>Staff &amp; control</h3>
+              <p>Cashier, manager and admin roles, PIN approvals, and an activity log of who did what.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+              <h3>Backups</h3>
+              <p>Automatic copies to a USB drive, email or Google Drive, with optional encryption.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="4" width="9" height="7" rx="1.5" /><rect x="13" y="4" width="9" height="7" rx="1.5" /><path d="M6.5 11v3h11v-3M12 14v4m-3 3h6" /></svg>
+              <h3>More counters</h3>
+              <p>Extra tills on the shop network share products, stock and bill numbers.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 17H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v7H6z" /></svg>
+              <h3>Printers &amp; hardware</h3>
+              <p>58 and 80 mm receipt printers, cash drawers, scanners, label scales and label printers.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h4" /><rect x="14" y="14" width="3" height="3" /></svg>
+              <h3>FBR invoices</h3>
+              <p>Bills reported to FBR, with the invoice number and QR code on the receipt.</p>
+            </article>
+            <article class="card reveal">
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10V5l7-2 7 2v6c0 5.6-7 10-7 10z" /><path d="m9 12 2 2 4-4" /></svg>
+              <h3>Your data stays yours</h3>
+              <p>Everything is kept on your computer. Uninstalling keeps it; nothing leaves the shop.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="download" class="section section-alt">
+        <div class="wrap">
+          <p class="eyebrow">Free for 14 days</p>
+          <h2>Download Tijara POS</h2>
+          <p class="section-lede" id="release-line">Every feature, no card needed. A one-time licence keeps it running after the trial.</p>
+          <div class="os-grid reveal">
+            <a class="os" data-asset="win-x64.exe" href="https://github.com/AhsanRao/tijara-pos-releases/releases/latest">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.5v7H3zM12 4.3 21 3v8.5h-9zM3 12.5h7.5v7L3 18.5zM12 12.5h9V21l-9-1.3z" /></svg>
+              <b>Windows</b><span>Windows 10 or 11, 64-bit</span>
+            </a>
+            <a class="os" data-asset="mac-arm64.dmg" href="https://github.com/AhsanRao/tijara-pos-releases/releases/latest">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16.5 3c.2 1.6-.9 3.3-2.5 3.5-.2-1.5 1-3.2 2.5-3.5zM19.6 16.6c-.6 1.4-1.6 3.4-3 3.4-1.3 0-1.6-.8-3.2-.8s-2 .8-3.3.8c-1.4 0-2.5-2.2-3.1-3.6-1.4-3.2-.6-7.6 2.6-7.7 1.3 0 2.2.9 3.2.9s1.8-.9 3.4-.9c1.1 0 2.3.6 3 1.6-2.7 1.6-2.2 5.4.4 6.3z" /></svg>
+              <b>Mac · Apple chip</b><span>M1, M2, M3, M4</span>
+            </a>
+            <a class="os" data-asset="mac-x64.dmg" href="https://github.com/AhsanRao/tijara-pos-releases/releases/latest">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16.5 3c.2 1.6-.9 3.3-2.5 3.5-.2-1.5 1-3.2 2.5-3.5zM19.6 16.6c-.6 1.4-1.6 3.4-3 3.4-1.3 0-1.6-.8-3.2-.8s-2 .8-3.3.8c-1.4 0-2.5-2.2-3.1-3.6-1.4-3.2-.6-7.6 2.6-7.7 1.3 0 2.2.9 3.2.9s1.8-.9 3.4-.9c1.1 0 2.3.6 3 1.6-2.7 1.6-2.2 5.4.4 6.3z" /></svg>
+              <b>Mac · Intel</b><span>Older Macs</span>
+            </a>
+            <a class="os" data-asset="linux-amd64.deb" href="https://github.com/AhsanRao/tijara-pos-releases/releases/latest">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3c-2.2 0-3.3 2-3.3 4.5 0 1.6-.4 2.6-1.4 4-1.3 1.8-2.3 3.8-2.3 5.6 0 .8.3 1.5 1 1.9 1.6 1 3.4 2 6 2s4.4-1 6-2c.7-.4 1-1.1 1-1.9 0-1.8-1-3.8-2.3-5.6-1-1.4-1.4-2.4-1.4-4C15.3 5 14.2 3 12 3z" /></svg>
+              <b>Linux</b><span>.deb for Ubuntu and Debian</span>
+            </a>
+          </div>
+          <div class="install">
+            <p><b>Windows</b> may say "Windows protected your PC": click <b>More info → Run anyway</b>.</p>
+            <p><b>Mac:</b> open it once, then <b>System Settings → Privacy &amp; Security → Open Anyway</b>.</p>
+            <p>
+              <a href="https://github.com/AhsanRao/tijara-pos-releases#install">Full install guide</a> ·
+              <a href="https://github.com/AhsanRao/tijara-pos-releases/releases">All versions</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="wrap">
+          <p class="eyebrow">Simple pricing</p>
+          <h2>Pay once. No monthly fee.</h2>
+          <div class="plans">
+            <article class="plan reveal">
+              <h3>Free trial</h3>
+              <p class="price">14 days</p>
+              <ul>
+                <li>Every feature unlocked</li>
+                <li>Your real products and sales</li>
+                <li>Keep all data when you buy</li>
+              </ul>
+              <a class="btn btn-outline" href="#download">Start the trial</a>
+            </article>
+            <article class="plan plan-main reveal">
+              <h3>Shop licence</h3>
+              <p class="price">One-time</p>
+              <ul>
+                <li>A licence key for your shop</li>
+                <li>Updates included for the period on your key</li>
+                <li>Activates offline, no internet check</li>
+              </ul>
+              <a class="btn" href="#contact">Ask for the price</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section section-alt">
+        <div class="wrap faq">
+          <div>
+            <p class="eyebrow">Questions</p>
+            <h2>Good to know</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>Do I need internet?</summary>
+              <p>No. Billing, stock, reports and backups to a USB drive all work offline. Internet is only used for updates and optional extras: email or Google Drive backups and FBR invoices.</p>
+            </details>
+            <details>
+              <summary>Where is my data kept?</summary>
+              <p>On your own computer, in a database that comes with the app. Uninstalling keeps your data, and backups are made automatically.</p>
+            </details>
+            <details>
+              <summary>Can I run more than one counter?</summary>
+              <p>Yes. One PC holds the shop data and the other tills connect to it over the shop network. They share products, stock, customers and bill numbers.</p>
+            </details>
+            <details>
+              <summary>Will my printer and scanner work?</summary>
+              <p>Any USB barcode scanner works. Most 58 and 80 mm thermal receipt printers work through their normal driver or directly over USB or the network, along with the cash drawer plugged into them.</p>
+            </details>
+            <details>
+              <summary>Can my cashier use it in Urdu?</summary>
+              <p>Yes. Each user picks English or اردو for the till, payment and shift screens. Receipts can print Urdu product names too.</p>
+            </details>
+            <details>
+              <summary>How do updates work?</summary>
+              <p>On Windows and Linux the app downloads new versions in the background and installs them when you close it. Your shop data is never touched by an update.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="wrap contact-row">
+          <div>
+            <h2>Want a demo for your shop?</h2>
+            <p>Licence, pricing or setup help: write and we'll get back to you.</p>
+          </div>
+          <a class="btn btn-big" href="mailto:raoahsan110@gmail.com">raoahsan110@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot-row">
+        <span class="brand brand-small"><img src="assets/mark-white.svg" alt="" width="22" height="18" /> Tijara POS</span>
+        <span>© <span id="year">2026</span> · <a href="https://github.com/AhsanRao/tijara-pos-releases/releases">Releases</a></span>
+      </div>
+    </footer>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>
