@@ -1,5 +1,5 @@
-// Homepage behaviour: latest-release download links, the ringing receipt, shop tabs, keyboard
-// tips, mobile menu and scroll reveal. The page reads fine with none of it.
+// Homepage behaviour: latest-release download links, shop tabs and the mobile menu.
+// The page reads fine with none of it.
 const REPO = 'AhsanRao/tijara-pos-releases'
 const calm = matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -36,57 +36,9 @@ async function linkLatestRelease() {
     }
   }
   document.getElementById('release-line').textContent =
-    `Version ${version}. Every feature free for 14 days; a one-time licence keeps it running.`
+    `Version ${version}. Every feature free for 14 days, no card needed. A one-time licence keeps it running after.`
 }
 linkLatestRelease().catch(() => {})
-
-/* --- Hero receipt: rings up line by line, like the till ---------------------------------- */
-
-function ringUp() {
-  const receipt = document.querySelector('.receipt')
-  if (!receipt || calm) return
-  const lines = [...receipt.querySelectorAll('.receipt-lines li')]
-  const paid = receipt.querySelector('.receipt-paid')
-  const total = document.getElementById('total')
-  const keys = {
-    scan: document.querySelector('.key-scan'),
-    enter: document.querySelector('.key-enter'),
-    pay: document.querySelector('.key-pay'),
-  }
-  const amounts = lines.map((li) => Number(li.querySelector('b').textContent.replace(/,/g, '')))
-  const lakh = (n) => n.toLocaleString('en-IN')
-  const press = (key, ms = 260) => {
-    key.classList.add('on')
-    setTimeout(() => key.classList.remove('on'), ms)
-  }
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms))
-
-  async function play() {
-    receipt.classList.add('ringing')
-    lines.forEach((li) => li.classList.remove('in'))
-    paid.classList.remove('in')
-    let sum = 0
-    total.textContent = '0'
-    await wait(700)
-    for (const [i, li] of lines.entries()) {
-      press(keys.scan)
-      await wait(380)
-      press(keys.enter)
-      li.classList.add('in')
-      sum += amounts[i]
-      total.textContent = lakh(sum)
-      await wait(650)
-    }
-    await wait(300)
-    press(keys.pay, 500)
-    await wait(450)
-    paid.classList.add('in')
-    await wait(5500)
-    play()
-  }
-  play()
-}
-ringUp()
 
 /* --- Shop types: ARIA tabs that swap the screen and its points --------------------------- */
 
@@ -95,7 +47,7 @@ const SHOPS = {
     shot: 'assets/shots/till.jpg',
     alt: 'The till billing groceries',
     points: [
-      'Quantity first: <kbd>5</kbd><kbd>*</kbd> then scan adds five',
+      'Quantity first: <kbd>5</kbd> <kbd>*</kbd> then scan adds five',
       'Rice, sugar and daal from label scales add their own weight',
       'Shelf and product labels with barcodes',
     ],
@@ -106,7 +58,7 @@ const SHOPS = {
     points: [
       'Batches and expiry: the earliest expiry sells first',
       'Expired stock is never sold; write it off in one click',
-      'Search by generic name; a prescription check for Rx items',
+      'Search by generic name, with a prescription check for Rx items',
     ],
   },
   clothing: {
@@ -123,7 +75,7 @@ const SHOPS = {
     alt: 'Product list with stock, prices and categories',
     points: [
       'Everything a counter needs, nothing extra',
-      'Add medicines or weighed items any time in Settings',
+      'Turn on medicines or weighed items any time in Settings',
       'Udhaar, stock and reports included',
     ],
   },
@@ -146,11 +98,12 @@ function selectShop(tab, focus) {
   shot.classList.add('swap')
   setTimeout(
     () => {
+      shot.onload = () => shot.classList.remove('swap')
       shot.src = shop.shot
       shot.alt = shop.alt
-      shot.onload = () => shot.classList.remove('swap')
+      if (shot.complete) shot.classList.remove('swap')
     },
-    calm ? 0 : 180,
+    calm ? 0 : 160,
   )
   if (focus) tab.focus()
 }
@@ -158,7 +111,7 @@ function selectShop(tab, focus) {
 for (const [i, tab] of tabs.entries()) {
   tab.addEventListener('click', () => selectShop(tab, false))
   tab.addEventListener('keydown', (e) => {
-    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
     if (step) {
       e.preventDefault()
       selectShop(tabs[(i + step + tabs.length) % tabs.length], true)
@@ -171,20 +124,28 @@ for (const [i, tab] of tabs.entries()) {
 // Preload the other screens so switching is instant.
 for (const { shot: src } of Object.values(SHOPS)) new Image().src = src
 
-/* --- Keyboard: each key explains itself ----------------------------------------------------- */
+/* --- Theme toggle: OS setting by default, visitor's pick remembered ------------------------ */
 
-const tip = document.getElementById('tip')
-for (const cap of document.querySelectorAll('.cap')) {
-  const show = () => {
-    document.querySelector('.cap.active')?.classList.remove('active')
-    cap.classList.add('active')
-    tip.textContent = cap.dataset.tip
-  }
-  cap.addEventListener('mouseenter', show)
-  cap.addEventListener('focus', show)
-  cap.addEventListener('click', show)
+const root = document.documentElement
+const themeBtn = document.querySelector('.theme')
+const osDark = matchMedia('(prefers-color-scheme: dark)')
+const currentTheme = () => root.dataset.theme || (osDark.matches ? 'dark' : 'light')
+
+function labelThemeBtn() {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark'
+  themeBtn.setAttribute('aria-label', `Switch to ${next} theme`)
 }
-document.querySelector('.cap-pay')?.classList.add('active')
+
+themeBtn.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark'
+  root.dataset.theme = next
+  try {
+    localStorage.setItem('theme', next)
+  } catch {}
+  labelThemeBtn()
+})
+osDark.addEventListener('change', labelThemeBtn)
+labelThemeBtn()
 
 /* --- Mobile menu ---------------------------------------------------------------------------- */
 
@@ -201,22 +162,3 @@ nav.addEventListener('click', (e) => {
     nav.classList.remove('open')
   }
 })
-
-/* --- Scroll reveal -------------------------------------------------------------------------- */
-
-const reveals = document.querySelectorAll('.reveal')
-if ('IntersectionObserver' in window && !calm) {
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        if (!e.isIntersecting) continue
-        e.target.classList.add('in')
-        io.unobserve(e.target)
-      }
-    },
-    { rootMargin: '0px 0px -8% 0px' },
-  )
-  reveals.forEach((el) => io.observe(el))
-} else {
-  reveals.forEach((el) => el.classList.add('in'))
-}
