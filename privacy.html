@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy · Tijara POS</title>
+    <meta name="description" content="How Tijara POS handles shop data: what it keeps, where, and what leaves your computer." />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Geist:wght@400..700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      try {
+        const t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <!-- Same text as the app's Settings → About (apps/desktop en.json, "legal"). Change both together. -->
+    <header class="top">
+      <div class="wrap top-row">
+        <a class="brand" href="./" aria-label="Tijara POS home">
+          <img class="mark" src="assets/mark-emerald.svg" alt="" width="26" height="20" />
+          <span>Tijara POS</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="section">
+      <div class="wrap">
+        <article class="legal">
+          <p class="eyebrow">Last updated 7 November 2026</p>
+          <h1>Privacy policy</h1>
+          <p class="lead">Tijara POS is software you install on your own computers. This policy explains what information it handles, where that information is kept and what, if anything, leaves your computer. In short: your shop data stays with you, and we do not collect it, see it or sell it.</p>
+          <h2>Who we are</h2>
+          <p>Tijara POS is developed in Pakistan by Ahsan Rao (&quot;we&quot;, &quot;us&quot;). For any question about this policy or your data, write to raoahsan110@gmail.com.</p>
+          <h2>Information the app keeps</h2>
+          <p>Shop data: your shop details, products, prices, stock and stock movements, purchases and suppliers, bills and payments, customers and udhaar, shifts and cash, staff accounts, settings and the activity log.</p>
+          <p>Where it is kept depends on how you set up the shop. On a single PC or the main PC it is in a PostgreSQL database on that computer, in the Tijara POS data folder (Windows: %APPDATA%\Tijara POS; macOS: ~/Library/Application Support/Tijara POS; Linux: ~/.config/Tijara POS). On a counter it stays on the main PC and is reached over the shop network with a password. With an online database it is in the PostgreSQL database you connect, such as your own Supabase project, over an encrypted connection; that provider&#x27;s own terms and privacy policy apply to it.</p>
+          <p>Staff passwords and PINs are stored as one-way scrypt hashes, so nobody can read them back. Other secrets (database passwords, email and Google Drive access, the FBR token, the backup passphrase and the cloud device key) are encrypted with the operating system&#x27;s key store on that computer.</p>
+          <p>Technical logs (start-ups, errors, update checks, backups) are written to a logs folder on each computer to help fix problems. Older entries are replaced as the file grows. They stay on the computer unless you send them in a support file.</p>
+          <h2>What leaves your computer</h2>
+          <p>Nothing about your shop is sent to us. Tijara POS connects to other services only in these cases:</p>
+          <p>Updates: when the app starts, every 6 hours and when you click Check for updates, it asks GitHub (github.com and its download servers) for the latest version and downloads it from there. GitHub receives your IP address and the app version and operating system in the request. No shop data is sent. GitHub&#x27;s privacy statement applies.</p>
+          <p>Email backups, if you set them up: backup files are sent through the email server and account you enter, to the addresses you choose. If you set a backup passphrase, the files are encrypted first.</p>
+          <p>Google Drive backups, if you connect Drive: backup files are uploaded to your own Google Drive. Tijara POS asks only for the drive.file permission, which lets it see the files it created and nothing else, plus your email address to show which account is connected. Google&#x27;s privacy policy applies.</p>
+          <p>FBR invoices, if you turn them on: for every bill, the invoice details FBR requires (items, quantities, prices, tax, your POS ID and, when given, the buyer&#x27;s name, phone, NTN or CNIC) are sent to FBR&#x27;s POS integration service, as the law asks of registered retailers.</p>
+          <p>Online database, if you connect one: all shop data is stored in that database. The connection is encrypted and checked, and Tijara POS turns on row level security so the provider&#x27;s public API cannot read the tables.</p>
+          <p>Cloud sync, if you connect Tijara Cloud: changes to products, stock, bills, customers and related records are uploaded over an encrypted connection to the cloud address shown in Settings → Cloud, so you can see your shop on your phone and through the read-only API keys you create.</p>
+          <p>Support files: made only when you click Save support file, saved where you choose, and sent only if you send them. They contain the app version, computer details and logs, never shop data, backups or passwords.</p>
+          <h2>What we never do</h2>
+          <p>Tijara POS has no analytics, telemetry, advertising or usage tracking. We do not sell, rent or share your data, and we have no way to reach your database. You do not need an account with us to use the app.</p>
+          <p>Licence keys are checked on your computer without going online. A key contains the shop or customer name it was issued to, the edition, the number of counters, the issue and updates-until dates and, if requested, the Computer ID of one PC.</p>
+          <h2>Information we keep about customers who buy a licence</h2>
+          <p>When you buy a licence we keep the name, phone number or email address and shop name you give us, the licence key we issued and its dates. We use them to issue and re-issue keys and to answer support requests, and keep them for as long as the licence is in use. Ask us at any time to see, correct or delete them.</p>
+          <h2>Your customers&#x27; information</h2>
+          <p>Customer names, phone numbers and udhaar balances that you enter are your shop&#x27;s records. You decide what to record and are responsible for it under the law, including telling your customers and keeping it safe. You can correct a customer&#x27;s details at any time. Bills and ledger entries are kept as accounting history and are not deleted.</p>
+          <h2>Keeping data safe</h2>
+          <p>Tijara POS gives each person their own account and role, can lock the till, records important actions in the activity log, encrypts backups when you set a passphrase and encrypts stored secrets. Keep regular backups, lock the till when you step away, use strong passwords and keep your computers&#x27; operating systems up to date. No system is completely secure, so keep a backup away from the shop as well.</p>
+          <h2>Keeping and deleting data</h2>
+          <p>Your data stays until you delete it. Uninstalling Tijara POS keeps the data folder so that a reinstall carries on. To remove everything from a computer, uninstall the app and delete its data folder (Settings → About shows where it is). Backups, email copies, Google Drive files, an online database and Tijara Cloud copies are separate and must be deleted where they are kept.</p>
+          <h2>Children</h2>
+          <p>Tijara POS is business software for shops and is not meant for use by children.</p>
+          <h2>Changes to this policy</h2>
+          <p>When this policy changes, the new version ships with the next app update and is published on tijarapos.github.io, with the date at the top. Changes never reduce the protection of data you already have.</p>
+          <h2>Contact</h2>
+          <p>Questions or requests about privacy: raoahsan110@gmail.com.</p>
+          <p class="legal-other"><a href="terms.html">Terms of use</a> · <a href="./">Tijara POS home</a></p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot-row">
+        <span class="brand brand-sm"><img class="mark" src="assets/mark-emerald.svg" alt="" width="20" height="16" /> Tijara POS</span>
+        <nav aria-label="Footer">
+          <a href="./#download">Download</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:raoahsan110@gmail.com">Contact</a>
+        </nav>
+        <span class="copy">© 2026 Tijara POS</span>
+      </div>
+    </footer>
+  </body>
+</html>

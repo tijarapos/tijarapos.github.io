@@ -1405,3 +1405,47 @@ kbd {
     transition: none !important;
   }
 }
+
+/* --- Privacy policy and terms ------------------------------------------------------------ */
+
+.legal {
+  max-width: 720px;
+}
+
+.legal .eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.legal h1 {
+  margin-top: 8px;
+}
+
+.legal .lead {
+  margin-top: 16px;
+  font-size: 1.125rem;
+  color: var(--fg-2);
+}
+
+.legal h2 {
+  margin-top: 40px;
+  font-size: 1.25rem;
+}
+
+.legal p {
+  margin-top: 12px;
+  line-height: 1.65;
+  color: var(--fg-2);
+}
+
+.legal a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.legal-other {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
