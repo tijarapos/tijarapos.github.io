@@ -725,21 +725,288 @@ kbd {
   font-weight: 500;
 }
 
-.install {
-  display: grid;
-  gap: 6px;
+.install-note {
+  margin: 0;
   font-size: 0.875rem;
   color: var(--muted);
 }
 
-.install b {
-  font-weight: 500;
+.install-note a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* Install: first launch on each OS, with drawings of the warning boxes people will see. */
+.os-tabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 36px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-muted);
+}
+
+.os-tabs button {
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--fg-2);
+  font: 500 0.9rem var(--sans);
+  cursor: pointer;
+}
+
+.os-tabs button[aria-selected='true'] {
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: 0 1px 2px rgb(16 24 40 / 0.08), 0 0 0 1px var(--line);
+}
+
+.install-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+.install-panel[hidden] {
+  display: none;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
+}
+
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  column-gap: 14px;
+}
+
+.steps li::before {
+  content: counter(step);
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: 600 0.85rem var(--mono);
+}
+
+.steps b {
+  font-weight: 600;
+}
+
+.steps span {
+  color: var(--fg-2);
+  font-size: 0.95rem;
+}
+
+.steps code,
+.install-tip code {
+  font: 0.85em var(--mono);
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--bg-muted);
+  border: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.steps a {
+  color: var(--accent);
+}
+
+.install-art {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.install-tip {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.install-tip summary {
+  cursor: pointer;
   color: var(--fg-2);
 }
 
-.install a {
-  color: var(--accent);
-  text-underline-offset: 3px;
+.install-tip pre {
+  margin: 8px 0 0;
+  overflow-x: auto;
+}
+
+.shot-os {
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: var(--lift);
+  font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.shot-os figcaption {
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg-2);
+  font: 0.85rem var(--sans);
+  border-radius: 0 0 10px 10px;
+}
+
+/* The highlighted control in each drawing: what to click. */
+.shot-os .hl {
+  outline: 2px solid #f5a623;
+  outline-offset: 2px;
+}
+
+/* Windows SmartScreen keeps its own blue in either theme, as on the PC. */
+.win-smartscreen {
+  overflow: hidden;
+  background: #0b5cad;
+  color: #fff;
+}
+
+.ss-body {
+  padding: 22px 22px 8px;
+}
+
+.ss-body b {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.ss-body p {
+  margin: 0 0 10px;
+  color: #e3eefb;
+}
+
+.ss-info span {
+  text-decoration: underline;
+}
+
+.ss-body dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  margin: 10px 0 0;
+  color: #e3eefb;
+}
+
+.ss-body dd {
+  margin: 0;
+}
+
+.ss-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  background: #0a4f95;
+}
+
+.ss-btn {
+  padding: 5px 18px;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+/* macOS alert and settings row: follow the page theme, as macOS follows its own. */
+.mac-alert {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 22px 22px 0;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.mac-alert > b {
+  font-size: 0.95rem;
+}
+
+.mac-alert > p {
+  margin: 0;
+  color: var(--fg-2);
+  font-size: 0.82rem;
+}
+
+.ma-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--bg-muted);
+  border: 1px solid var(--line);
+}
+
+.ma-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  margin: 8px 0 16px;
+}
+
+.ma-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--bg-muted);
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mac-alert figcaption {
+  justify-self: stretch;
+  margin: 0 -22px;
+  text-align: left;
+}
+
+.mac-settings {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.ms-title {
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+
+.ms-section {
+  padding: 12px 16px 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.ms-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 12px 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-muted);
+  color: var(--fg-2);
 }
 
 /* Pricing */
@@ -1043,6 +1310,15 @@ kbd {
 
 /* Phone */
 @media (max-width: 720px) {
+  .install-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .ms-row {
+    flex-wrap: wrap;
+  }
+
   .top nav {
     display: none;
     position: absolute;

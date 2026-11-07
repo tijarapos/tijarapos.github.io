@@ -1,4 +1,4 @@
-// Homepage behaviour: latest-release download links, shop tabs and the mobile menu.
+// Homepage behaviour: latest-release download links, shop and install tabs, the mobile menu.
 // The page reads fine with none of it.
 const REPO = 'AhsanRao/tijara-pos-releases'
 const calm = matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -81,7 +81,7 @@ const SHOPS = {
   },
 }
 
-const tabs = [...document.querySelectorAll('[role="tab"]')]
+const tabs = [...document.querySelectorAll('#shops [role="tab"]')]
 const panel = document.getElementById('panel-shop')
 const shot = document.getElementById('shop-shot')
 const points = document.getElementById('shop-points')
@@ -123,6 +123,36 @@ for (const [i, tab] of tabs.entries()) {
 }
 // Preload the other screens so switching is instant.
 for (const { shot: src } of Object.values(SHOPS)) new Image().src = src
+
+/* --- Install steps: one tab per OS, opening on the visitor's own ----------------------------- */
+
+const osTabs = [...document.querySelectorAll('#install [role="tab"]')]
+
+function selectOs(tab, focus) {
+  for (const t of osTabs) {
+    const on = t === tab
+    t.setAttribute('aria-selected', String(on))
+    t.tabIndex = on ? 0 : -1
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on
+  }
+  if (focus) tab.focus()
+}
+
+for (const [i, tab] of osTabs.entries()) {
+  tab.addEventListener('click', () => selectOs(tab, false))
+  tab.addEventListener('keydown', (e) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]
+    if (step) {
+      e.preventDefault()
+      selectOs(osTabs[(i + step + osTabs.length) % osTabs.length], true)
+    }
+  })
+}
+{
+  const os = { Windows: 'win', Mac: 'mac', Linux: 'linux' }[visitorAsset()[1]]
+  const mine = osTabs.find((t) => t.dataset.os === os)
+  if (mine) selectOs(mine, false)
+}
 
 /* --- Theme toggle: OS setting by default, visitor's pick remembered ------------------------ */
 
