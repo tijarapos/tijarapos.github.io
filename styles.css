@@ -1117,6 +1117,28 @@ kbd {
   color: var(--fg-2);
 }
 
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* WhatsApp's own green, so the button is recognised at a glance. */
+.btn-whatsapp {
+  background: #1fa855;
+  color: #fff;
+}
+
+.btn-whatsapp:hover {
+  background: #178a45;
+}
+
+.btn-whatsapp .wa {
+  width: 1.25em;
+  height: 1.25em;
+  fill: currentcolor;
+}
+
 /* Footer */
 .foot {
   border-top: 1px solid var(--line);
