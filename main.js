@@ -15,6 +15,16 @@ function visitorAsset() {
   return [null, null]
 }
 
+function showInstallOnDownload(link, assetName) {
+  link.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    const os = assetName.startsWith('win-') ? 'win' : assetName.startsWith('mac-') ? 'mac' : 'linux'
+    const tab = osTabs.find((t) => t.dataset.os === os)
+    if (tab) selectOs(tab, false)
+    document.getElementById('install').scrollIntoView({ behavior: calm ? 'instant' : 'smooth', block: 'start' })
+  })
+}
+
 async function linkLatestRelease() {
   const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
   if (!res.ok) return
@@ -25,6 +35,7 @@ async function linkLatestRelease() {
     const asset = release.assets.find((a) => a.name.endsWith(card.dataset.asset))
     if (!asset) continue
     card.href = asset.browser_download_url
+    showInstallOnDownload(card, card.dataset.asset)
     const ver = document.createElement('span')
     ver.className = 'ver'
     ver.textContent = `v${version} · ${Math.round(asset.size / 1e6)} MB`
@@ -32,6 +43,7 @@ async function linkLatestRelease() {
     if (card.dataset.asset === mine) {
       card.classList.add('mine')
       document.getElementById('hero-download').href = asset.browser_download_url
+      showInstallOnDownload(document.getElementById('hero-download'), card.dataset.asset)
       document.getElementById('hero-download-label').textContent = `Download for ${osName}`
     }
   }
